@@ -1,0 +1,36 @@
+/* App.css */
+.App {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header header header"
+      "left center right";
+    height: 100vh;
+  }
+  
+  .header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .left {
+    grid-area: left;
+    /* Your styles for the left area */
+  }
+  
+  .center {
+    grid-area: center;
+    display: grid;
+    place-items: center;
+  }
+  
+  .right {
+    grid-area: right;
+    /* Your styles for the right area */
+  }
+  
