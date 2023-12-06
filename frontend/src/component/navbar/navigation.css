@@ -1,86 +1,20 @@
-nav {
-    background-color: #F9F5E8;
+.navigation {
+    text-align: center;
 }
 
-.Navbar-flex {
+.navigation-navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    padding: 23px 61px;
 }
 
-.navbar__nav-mobile {
-    display: none;
-    font-size: 40px;
+.expense-container > h1 {
+    font-size: 62px;
 }
 
-.nav__items {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.navbar__navbar {
-    display: flex;
-    flex-direction: column;
-}
-
-.navbar__navbar-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navbar__logo > h1 {
-    font-family: 'Prata', serif;
-    color: #263734;
-    font-size: 36.675px;
-    font-weight: 400;
-}
-
-/* .active {
-    color: #263734;
-} */
-
-.nav__links > a {
-    color: rgba(38, 55, 52, 0.80);
-    font-family: Switzer;
-    text-decoration: none;
-    font-size: 24.116px;
-    font-weight: 400;
-    margin: 0 20px;
-    text-align: center;
-}
-
-.nav__links-donate {
-    color: #263734;
-    border-radius: 15px;
-    background: #FDD65B;
-    padding: 10px 20px;
-    justify-content: center;
-    text-align: center;
-    font-family: Switzer;
-    font-size: 24.116px;
-    font-style: normal;
-    font-weight: 400;
-    margin-right: 35px;
-}
-
-@media (max-width: 768px) {
-    .navbar__nav-mobile {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    .navbar__navbar-mobile {
-        display: none;
-    }
-
-    .navbar__column {
-        display: flex;
-        flex-direction: column;
-    }
+.navigation-title {
+    border: 2px solid #000000;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 12px;
 }
