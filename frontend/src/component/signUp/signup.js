@@ -1,51 +1,72 @@
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
+import Dashboard from '../Dashboard/Dashboard';
 
-class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    };
+const Signup = () => {
+  const navigate = useNavigate();
+  
+  const [state, setState] = React.useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    signedUp: false,
+    error: '',
+  });
+
+  const handleNameChange = (e) => {
+    setState({ ...state,name: e.target.value });
   }
 
-  handleNameChange = (e) => {
-    this.setState({ name: e.target.value });
+  const handleEmailChange = (e) => {
+    setState({ ...state, email: e.target.value });
   }
 
-  handleEmailChange = (e) => {
-    this.setState({ email: e.target.value });
+  const handlePasswordChange = (e) => {
+    setState({ ...state, password: e.target.value });
   }
 
-  handlePasswordChange = (e) => {
-    this.setState({ password: e.target.value });
+  const handleConfirmPasswordChange = (e) => {
+    setState({ ...state,confirmPassword: e.target.value });
   }
 
-  handleConfirmPasswordChange = (e) => {
-    this.setState({ confirmPassword: e.target.value });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your signup logic here
+
+    const { name, email, password, confirmPassword } = state;
+
+    if (password !== confirmPassword) {
+      setState({ ...state, signedUp: false, error: 'Passwords do not match' });
+    } else {
+      localStorage.setItem('user', JSON.stringify({ name, email, password }));
+      setState({ ...state, signedUp: true, error: '' });
+
+      // Redirect to the login page
+      navigate('/login');
+    }
   }
 
-  render() {
+  if (state.signedUp) {
+    return (
+      <div className="signup-container">
+        <h1>Sign Up Successful! You can log in now.</h1>
+      </div>
+    );
+  }
+
     return (
       <div className="signup-container">
         <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
             name="name"
             placeholder="Your name"
-            value={this.state.name}
-            onChange={this.handleNameChange}
+            value={state.name}
+            onChange={handleNameChange}
             required
           />
           <br /><br />
@@ -55,8 +76,8 @@ class Signup extends Component {
             id="email"
             name="email"
             placeholder="Your email"
-            value={this.state.email}
-            onChange={this.handleEmailChange}
+            value={state.email}
+            onChange={handleEmailChange}
             required
           />
           <br /><br />
@@ -66,8 +87,8 @@ class Signup extends Component {
             id="password"
             name="password"
             placeholder="Your password"
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
+            value={state.password}
+            onChange={handlePasswordChange}
             required
           />
           <br /><br />
@@ -77,16 +98,16 @@ class Signup extends Component {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Confirm your password"
-            value={this.state.confirmPassword}
-            onChange={this.handleConfirmPasswordChange}
+            value={state.confirmPassword}
+            onChange={handleConfirmPasswordChange}
             required
           />
           <br /><br />
           <button type="submit">Sign Up</button>
+          {state.error && <p className="error-message">{state.error}</p>}
         </form>
       </div>
     );
   }
-}
 
 export default Signup;

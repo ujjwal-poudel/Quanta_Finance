@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
+import Dashboard from '../Dashboard/Dashboard';
 
 class Login extends Component {
   constructor(props) {
@@ -7,6 +8,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      loggedIn: false,
+      error:'',
     };
   }
 
@@ -21,9 +24,23 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // Add your authentication logic here
+    const { email, password } = this.state;
+    // Retrieve user data from local storage
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+
+  // Check if user exists and credentials match
+  if (storedUser && storedUser.email === email && storedUser.password === password) {
+   // if (email === 'S1wS0@example.com' && password === 'password') {
+      this.setState({ loggedIn: true, error:'' });
+    } else {
+      this.setState({ loggedIn: false, error:'Invalid email or password' });
+    }
   }
 
   render() {
+    if (this.state.loggedIn) {
+      return <Dashboard />;
+    }
     return (
       <div className="login-container">
         <h1>Welcome Back</h1>
@@ -51,6 +68,7 @@ class Login extends Component {
           />
           <br /><br />
           <button type="submit">Login</button>
+          {this.state.error && <p className="error-message">{this.state.error}</p>}
         </form>
       </div>
     );
