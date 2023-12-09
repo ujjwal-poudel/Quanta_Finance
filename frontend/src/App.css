@@ -34,3 +34,11 @@
     /* Your styles for the right area */
   }
   
+  .welcome-message {
+    font-size: 30px;
+  }
+  
+  .logo {
+    width: 50%;
+    transform: scale(0.8);
+  }

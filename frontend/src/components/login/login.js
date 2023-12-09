@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './login.css';
-import Dashboard from '../Dashboard/Dashboard';
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../dashboard/dashboard';
+import {  Link } from 'react-router-dom';
+
 
 class Login extends Component {
   constructor(props) {
@@ -9,7 +12,7 @@ class Login extends Component {
       email: '',
       password: '',
       loggedIn: false,
-      error:'',
+      error: '',
     };
   }
 
@@ -31,7 +34,7 @@ class Login extends Component {
   // Check if user exists and credentials match
   if (storedUser && storedUser.email === email && storedUser.password === password) {
    // if (email === 'S1wS0@example.com' && password === 'password') {
-      this.setState({ loggedIn: true, error:'' });
+      this.setState({ loggedIn: true, error:'Correct email and password' });
     } else {
       this.setState({ loggedIn: false, error:'Invalid email or password' });
     }
@@ -39,8 +42,12 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn) {
-      return <Dashboard />;
+     // <button onClick={() => useNavigate('/')}>Home</button>
+     return <Dashboard />
+    } else {
+      <button onClick={() => useNavigate('/signup')}>Sign Up</button>
     }
+
     return (
       <div className="login-container">
         <h1>Welcome Back</h1>
@@ -68,7 +75,10 @@ class Login extends Component {
           />
           <br /><br />
           <button type="submit">Login</button>
-          {this.state.error && <p className="error-message">{this.state.error}</p>}
+          <p className="error-message">{this.state.error}</p>
+          <p>
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </p>
         </form>
       </div>
     );

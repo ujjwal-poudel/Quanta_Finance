@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from '../dashboard/dashboard';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Signup = () => {
       setState({ ...state, signedUp: true, error: '' });
 
       // Redirect to the login page
-      navigate('/login');
+      // navigate('/login');
     }
   }
 
@@ -51,6 +51,7 @@ const Signup = () => {
     return (
       <div className="signup-container">
         <h1>Sign Up Successful! You can log in now.</h1>
+        <button onClick={() => navigate('/login')}>Login</button>
       </div>
     );
   }
